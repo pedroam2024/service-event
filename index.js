@@ -15,5 +15,5 @@ app.use("/events", clientesRouter);
 
 // Inicia el servidor
 app.listen(port, () => {
-  console.log("Servidor escuchando en http://localhost:${port}");
+  console.log('Servidor escuchando en http://localhost:${port}');
 });
