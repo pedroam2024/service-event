@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
 
 // Nueva ruta para insertar un evento
 router.post("/", async (req, res) => {
-  const { id, title, fechainicio, fechafin, description, email, phone, timezone } = req.body;
+  const {title, fechainicio, fechafin, description, email, phone, timezone } = req.body;
 
   // Ajustar la fecha y hora a la zona horaria del cliente
   const fechainicioClient = moment.tz(fechainicio, timezone).format();
@@ -41,8 +41,8 @@ router.post("/", async (req, res) => {
 
   try {
     const result = await db.pool.query(
-      "INSERT INTO eventos (id, title, fechainicio, fechafin, description, email, phone) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-      [id, title, fechainicioClient, fechafinClient, description, email, phone]
+      "INSERT INTO eventos (title, fechainicio, fechafin, description, email, phone) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [title, fechainicioClient, fechafinClient, description, email, phone]
     );
     res.json(result.rows[0]);
   } catch (error) {
